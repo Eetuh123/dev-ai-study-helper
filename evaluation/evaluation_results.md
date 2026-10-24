@@ -87,9 +87,9 @@ generation, source references, and mathematical correctness.
 
 | Test ID | Check | Result |
 | --- | --- | --- |
-| llama32-initial-01 | Lessons, practice questions, and source references are displayed | Pass |
-| llama32-initial-02 | Derivative rules worked example is mathematically correct | Fail |
-| llama32-initial-03 | Function notation lesson uses a valid geometric example | Fail |
+| llama32-01 | Lessons, practice questions, and source references are displayed | Pass |
+| llama32-02 | Derivative rules worked example is mathematically correct | Fail |
+| llama32-03 | Function notation lesson uses a valid geometric example | Fail |
 
 These are three checks of one preliminary application run, not three
 independent model benchmark prompts. They should not be interpreted
@@ -118,17 +118,21 @@ UNVERIFIED and that the notice was visible. This change corrected
 the verification label; it did not correct generated mathematical
 errors or implement factual verification.
 
+This describes the verifier at the time of the preliminary test.
+The application later added Gemini-based lesson verification.
+Its reliability in detecting mathematical errors has not yet
+been established through a controlled evaluation.
+
 ### Interpretation and Limitations
 
 The test confirmed that material generation worked through the
 application, but the generated lessons contained mathematical errors
 despite receiving retrieved source material.
 
-Response time was not measured. The output was reviewed manually,
-and the same prompts have not yet been run across multiple models.
-
-A controlled model comparison is still required to assess correctness,
-explanation clarity, and response time under comparable conditions.
+Response time was not measured during this preliminary application
+test. The later controlled model comparison is documented below;
+it used separate, standardized prompts rather than repeating this
+initial application run.
 
 
 ## Model Comparison — 23 October 2026
