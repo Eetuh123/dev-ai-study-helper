@@ -307,23 +307,60 @@ pytest
 
 ## Evaluation
 
-The application was evaluated using nine test cases covering study material generation, retrieval-augmented generation (RAG), mathematical correctness, and error handling. The tests included preliminary manual UI testing, manual reviews of generated lessons, manual retrieval tests, and automated pytest tests.
+Evaluation included RAG retrieval checks, automated input validation,
+a controlled model comparison, and manual application testing.
 
-Each test case included an expected behavior, an actual result, and a status of pass, fail, or partial. Of the nine test cases, six passed, two failed, and one partially passed.
+### Retrieval and validation
 
-The preliminary UI test demonstrated that the application could generate prerequisite study lessons, practice questions, and OpenStax source references using Llama 3.2. This was an earlier test and should not be interpreted as a test of the final selected model, qwen3.5:9b. The retrieval tests also showed that the system could retrieve relevant Chain Rule material and recognize the Finnish term ketjusääntö. Automated tests confirmed that unknown concepts and invalid top_k values were rejected before the Chroma collection was accessed.
+The Chain Rule search returned the correct textbook module, formulas,
+and source references. The Finnish term "ketjusääntö" was also recognized.
 
-However, manual reviews identified mathematical errors in two generated lessons. The derivative rules lesson contained an incorrect differentiation example, while the functions lesson incorrectly used the area formula for a square to describe a triangle. The fraction retrieval test partially passed because, although some relevant material was returned, the first result was too advanced for a beginner.
+Fraction retrieval improved after correcting the skill's source module,
+but some returned material remained too advanced for beginners.
 
-Overall, the evaluation showed that the main generation and retrieval functionality worked in the tested cases, but generated mathematical content was not always reliable. The evaluation was limited to nine test cases, and response times were not measured during the preliminary UI tests. The results should therefore be considered an initial assessment rather than a comprehensive measure of system reliability.
+All three automated RAG input validation tests passed. These tests
+checked unknown concept IDs and non-positive result counts.
 
-See [`evaluation/README.md`](evaluation/README.md) for more details.
+### Model comparison
+
+Three local models answered the same five mathematics questions using
+the same retrieved source material.
+
+| Model | Correctness / 10 | Mean clarity / 3 | Mean response time |
+| --- | --- | --- | --- |
+| llama3.2 | 7 | 2.2 | 2.71 s |
+| qwen3.5:4b | 8 | 2.2 | 4.53 s |
+| qwen3.5:9b | 9 | 2.8 | 10.78 s |
+
+We selected qwen3.5:9b for its higher correctness and explanation
+clarity, accepting its longer response time.
+
+Correctness and clarity scores are review judgments. Each question
+was run once per model, so these results do not establish general
+model accuracy or performance.
+
+### Application testing
+
+Preliminary testing with llama3.2 confirmed that lesson generation
+and source references worked, but identified mathematical errors
+in two generated lessons.
+
+Later manual checks confirmed that learning progress survived an
+application restart, a failed quiz displayed feedback, and retrying
+generated new questions.
+
+Generated content can still contain errors. The reliability of the
+Gemini verification feature has not been established through a
+controlled evaluation.
+
+See [evaluation instructions](evaluation/README.md) and
+[detailed results](evaluation/evaluation_results.md).
 
 ## Known limitations
 
 - **Mathematical correctness:** The language model can generate incorrect formulas, worked examples, and explanations. Successful lesson generation does not guarantee correctness.
 - **Retrieval relevance:** Retrieved content can be relevant to a topic but still be too advanced for the intended learner.
-- **Limited evaluation coverage:** Only nine test cases were evaluated, so the results do not cover all supported topics or possible user inputs.
+- **Limited evaluation coverage:** The evaluation includes a small set of retrieval and application checks and five comparison questions per model. It does not cover all supported topics or user inputs.
 - **Manual testing:** Several tests relied on manual inspection, which may be subjective and does not provide fully repeatable measurements.
 - **Performance measurements:** Response times were not recorded during the preliminary UI tests.
 - **Error-handling coverage:** Automated tests cover unknown concepts and invalid retrieval result counts, but the current test results do not establish how the application behaves during connection failures or other service errors.

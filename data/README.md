@@ -1,18 +1,36 @@
-# Data Directory
+# Project Data
 
-This directory is designated for project-specific data, reference documents, sample files, or datasets used by your application (for example, documents used for RAG or input samples).
+## Concept map
 
-## Data Governance & Commit Guidelines
+`concepts.json` contains 74 mathematical skills, including their
+names, descriptions, direct prerequisites, and source references.
 
-To maintain privacy, security, and repository health, **DO NOT COMMIT**:
+The skills cover algebra, functions, trigonometry, limits,
+and differentiation.
 
-1. **Confidential Data:** Proprietary business information, private company records, or non-public data.
-2. **Personal Data (PII):** Names, phone numbers, email addresses, or personal identity information without explicit consent.
-3. **Large Datasets:** Files larger than 10MB (store large raw datasets externally or use `.gitignore`).
-4. **Credentials & Secrets:** Never store API keys, tokens, or passwords in data files.
+## Learning materials
 
-Use this directory responsibly for small, sample datasets and public documentation.
+The application uses material from three OpenStax textbooks:
 
-## Contents
+- College Algebra 2e
+- Precalculus 2e
+- Calculus Volume 1
 
-- `conceptsMockup.json`: small hand-written concept map (5 concepts) used by the skeleton. Each entry follows the `Concept` schema in `src/schemas/study.py`. The real map replaces it later; the path is set by `CONCEPT_MAP_PATH` in `.env`.
+Downloaded books and converted files are stored locally under
+`data/books/` and are excluded from Git.
+
+## Retrieval data
+
+`data/rag/` contains generated text chunks and other local retrieval
+files. These files are excluded from Git.
+
+The Chroma database is generated locally. On Windows, the current
+configuration stores it under
+`%LOCALAPPDATA%\dev-ai-project\chroma`.
+
+See the main README for book download instructions, conversion,
+and Chroma indexing.
+
+## Learning progress
+
+`progress.json` stores local learning progress between sessions.

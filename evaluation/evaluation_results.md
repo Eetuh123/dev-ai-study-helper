@@ -28,7 +28,7 @@ reported separately from functional test results.
   in the five-prompt comparison, with a mean response time of 10.78 seconds.
 
 
-## Preliminary RAG Retrieval Tests - Lauri
+## Preliminary RAG Retrieval Tests
 
 - Chain rule: successful. The search returned the correct module,
   chain rule formulas, and source references.
@@ -41,7 +41,7 @@ These are development-stage observations, not final evaluation results.
 
 
 
-### Fractions retrieval: source correction - Lauri
+### Fractions retrieval: source correction
 
 Changed the fractions skill's source from module m51239
 (Real Numbers: Algebra Essentials) to m51248 (Rational Expressions)
@@ -56,7 +56,7 @@ the first result involved complex algebraic fractions. The material
 is better suited to revision than teaching fractions from scratch.
 
 
-### RAG input validation - Lauri
+### RAG input validation
 
 Command:
 python -m pytest tests/test_rag_validation.py -v
@@ -69,7 +69,7 @@ raise ValueError before accessing the Chroma collection.
 These tests check input validation, not retrieval relevance.
 
 
-## Preliminary llama3.2 Application Test - Lauri
+## Preliminary llama3.2 Application Test
 
 ### Method
 
