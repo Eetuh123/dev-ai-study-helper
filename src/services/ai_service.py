@@ -255,16 +255,7 @@ def get_topic_material(concept_id: str) -> TopicMaterial:
         # Dont automatically verify
         lesson.verified = False
         issues = []
-        '''
-        # Verifier down -> still show the lesson, marked unverified.     
-        try:
-            result = verify(lesson.content, chunks)
-            lesson.verified = result.passed
-            issues = result.issues
-        except Exception:
-            lesson.verified = False
-            issues = ["Verifier unavailable, this material is unverified."]
-        '''
+        
         practice = _fresh_questions(concept_id, QUIZ_QUESTIONS, set())
     except Exception as err:
         return TopicMaterial(concept=concept, lesson=Lesson(concept_id=concept_id, content=""),
